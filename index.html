@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icon-192x192.png">
+    <link rel="icon" href="/images/icon-192x192.png" type="image/png">
+    <meta name="theme-color" content="#333">
+</head>
+<body>
+    <div class="container">
+        <h1>🎙️ Voice AI Assistant</h1>
+        <p>Click the button to speak, or type your question below.</p>
+        
+        <div class="input-methods">
+            <button id="listenBtn">Ask Gemini</button>
+            <form id="text-input-form">
+                <input type="text" id="textInput" placeholder="Type a question..." autocomplete="off">
+                <button type="submit" id="sendBtn">➡️</button>
+            </form>
+        </div>
+
+        <div class="conversation">
+            <div id="question" class="bubble user"></div>
+            <div id="answer" class="bubble assistant"></div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script>
+        // Register the service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('Service Worker registered!'))
+                    .catch(err => console.log('Service Worker registration failed: ', err));
+            });
+        }
+    </script>
+</body>
+</html>
