@@ -1,0 +1,37 @@
+// Import the Google AI SDK. You'll need to install it for your backend environment.
+// On Vercel/Netlify, you would add @google/generative-ai to your package.json
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+// IMPORTANT: Set your API key as an environment variable on your hosting platform.
+// DO NOT hardcode the key here.
+const API_KEY = process.env.GEMINI_API_KEY;
+const MODEL_NAME = "gemini-pro";
+
+const genAI = new GoogleGenerativeAI(API_KEY);
+const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+
+// This is the handler function that your hosting platform will run
+export default async function handler(req, res) {
+  // Ensure this is a POST request
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  try {
+    const { prompt } = req.body;
+    if (!prompt) {
+      return res.status(400).json({ error: 'Prompt is required' });
+    }
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    // Send the response back to the front-end
+    res.status(200).json({ text: text });
+
+  } catch (error) {
+    console.error("Error in serverless function:", error);
+    res.status(500).json({ error: 'Failed to fetch response from Gemini' });
+  }
+}
