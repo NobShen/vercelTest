@@ -1,0 +1,60 @@
+/* Add these new rules to your existing style.css */
+
+.input-methods {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+#text-input-form {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    background-color: #303134;
+    border-radius: 50px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#textInput {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    outline: none;
+}
+
+#sendBtn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#sendBtn:hover {
+    background-color: #287ff8;
+}
+
+/* Updated disabled styles to apply to both buttons */
+#listenBtn:disabled, #sendBtn:disabled {
+    background-color: #5f6368;
+    cursor: not-allowed;
+}
+
+#textInput:disabled {
+    cursor: not-allowed;
+}
